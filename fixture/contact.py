@@ -37,3 +37,17 @@ class ContactHelper:
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
         wd.find_element_by_name("submit").click()
+
+    def delete_first(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//tr[2]/td[8]/a').click()
+        wd.find_element_by_xpath("//*[@value='Delete']").click()
+
+    def modify(self, contact):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//tr[2]/td[8]/a').click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contact.first_name)
+        wd.find_element_by_xpath("//*[@value='Update']").click()
+
