@@ -14,6 +14,13 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except:
+            return False
+
     def setUp(self):
         self.wd = webdriver.Chrome()
         self.wd.implicitly_wait(30)
