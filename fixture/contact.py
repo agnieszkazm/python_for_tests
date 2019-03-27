@@ -6,37 +6,24 @@ class ContactHelper:
     def create(self, contact):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.first_name)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.midle_name)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.surname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        wd.find_element_by_name("home").click()
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(contact.home_no)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contact.mobile)
-        wd.find_element_by_name("work").click()
-        wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(contact.work)
-        wd.find_element_by_name("fax").click()
-        wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(contact.fax)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.mail)
-        wd.find_element_by_name("homepage").click()
-        wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys(contact.homepage)
+        self.change_field_value("firstname", contact.first_name)
+        self.change_field_value("middlename", contact.midle_name)
+        self.change_field_value("lastname", contact.surname)
+        self.change_field_value("nickname", contact.nickname)
+        self.change_field_value("home", contact.home_no)
+        self.change_field_value("mobile", contact.mobile)
+        self.change_field_value("work", contact.work)
+        self.change_field_value("fax", contact.fax)
+        self.change_field_value("email", contact.mail)
+        self.change_field_value("homepage", contact.homepage)
         wd.find_element_by_name("submit").click()
+
+    def change_field_value(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def delete_first(self):
         wd = self.app.wd
@@ -46,8 +33,10 @@ class ContactHelper:
     def modify(self, contact):
         wd = self.app.wd
         wd.find_element_by_xpath('//tr[2]/td[8]/a').click()
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.first_name)
+        self.change_field_value("firstname", contact.first_name)
         wd.find_element_by_xpath("//*[@value='Update']").click()
+
+    def count(self):
+        wd = self.app.wd
+        return len(wd.find_elements_by_name("selected[]"))
 
