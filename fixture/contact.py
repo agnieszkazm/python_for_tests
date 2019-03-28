@@ -5,6 +5,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        self.app.open_website()
         wd.find_element_by_link_text("add new").click()
         self.change_field_value("firstname", contact.first_name)
         self.change_field_value("middlename", contact.midle_name)
@@ -27,11 +28,13 @@ class ContactHelper:
 
     def delete_first(self):
         wd = self.app.wd
+        self.app.open_website()
         wd.find_element_by_xpath('//tr[2]/td[8]/a').click()
         wd.find_element_by_xpath("//*[@value='Delete']").click()
 
     def modify(self, contact):
         wd = self.app.wd
+        self.app.open_website()
         wd.find_element_by_xpath('//tr[2]/td[8]/a').click()
         self.change_field_value("firstname", contact.first_name)
         wd.find_element_by_xpath("//*[@value='Update']").click()
