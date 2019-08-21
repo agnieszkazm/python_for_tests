@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -43,3 +45,11 @@ class ContactHelper:
         wd = self.app.wd
         return len(wd.find_elements_by_name("selected[]"))
 
+    def get_contacts_list(self):
+        wd = self.app.wd
+        contacts = []
+        for element in wd.find_elements_by_name("selected[]"):
+            id = element.get_attribute("value")
+            name = element.get_attribute("title")[8:-1].split()
+            contacts.append(Contact(first_name=name[0], surmane=name[1], id=id))
+        return contacts
